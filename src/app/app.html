@@ -1,21 +1,17 @@
 <div style="width: 400px">
   <mat-form-field>
-    <input matInput value="Search" name="search-input" [(ngModel)]="inputData" (input)="filterItems()" />
+    <input matInput value="Search" name="search-input" [(ngModel)]="inputData" />
   </mat-form-field>
 
-  <button matButton="outlined" (click)="onAdd()" disabled="{{inputData.length === 0}}">Add</button>
+  <button matButton="outlined" (click)="onAdd()" disabled="{{!isAddEnabled()}}">Add</button>
   <button matButton="outlined" (click)="onDelete()"  disabled="{{hasSelectedItems()}}">Delete</button>
 
   <br>
 
-  <mat-selection-list #items>
-    @for (item of public; track item) {
+  <mat-selection-list>
+    @for (item of publicData(); track item) {
       <mat-list-option selected="{{item.selected}}" (selectedChange)="onSelectChanged(item)">{{item.value}}</mat-list-option>
     }
   </mat-selection-list>
-
-  @for (item of inputItems; track item) {
-    {{item.value}}
-  }
 </div>
 
